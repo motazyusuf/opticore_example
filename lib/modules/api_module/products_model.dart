@@ -5,7 +5,9 @@ class Products {
 
   factory Products.fromJson(Map<String, dynamic> json) {
     return Products(
-      json["products"].map((product) => Product.fromJson(product)).toList(),
+      (json["products"] as List<dynamic>)
+          .map((product) => Product.fromJson(product))
+          .toList(),
     );
   }
 }
@@ -14,6 +16,7 @@ class Product {
   String title;
   double price;
   String imageURL;
+
   Product({required this.title, required this.price, required this.imageURL});
 
   factory Product.fromJson(Map<String, dynamic> json) {

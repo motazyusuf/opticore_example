@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ApiModuleScreen(bloc: ApiModuleBloc()),
+      home: ApiModuleScreen(bloc: ApiModuleBloc()
+        ..add(ExampleModuleInitialEvent())),
     );
   }
 }
