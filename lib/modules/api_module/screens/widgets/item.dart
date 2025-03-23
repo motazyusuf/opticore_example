@@ -31,7 +31,12 @@ class Item extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(product.imageURL),
+            Center(
+              child: SizedBox(
+                height: 400,
+                child: Image.network(product.imageURL, fit: BoxFit.cover),
+              ),
+            ),
             Text(
               product.title,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
