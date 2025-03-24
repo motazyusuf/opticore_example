@@ -1,16 +1,15 @@
+
 import 'package:flutter/material.dart';
 import 'package:opticore/opticore.dart';
 
-import '../../api_module_import.dart';
-import '../../products_model.dart';
 
 class PostItemBottomSheet extends StatelessWidget {
-  PostItemBottomSheet({super.key, required this.parentContext});
-
   final TextEditingController name = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController image = TextEditingController();
-  final BuildContext parentContext;
+  final Function(String? image, String? name, double? price)? onAdd;
+
+  PostItemBottomSheet({super.key, required this.onAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +41,12 @@ class PostItemBottomSheet extends StatelessWidget {
                 backgroundColor: Theme.of(context).primaryColorLight,
               ),
               onPressed: () {
-                parentContext.read<ApiModuleBloc>().add(
-                  AddProductEvent(
-                    Product(
-                      imageURL: image.text,
-                      price: price.text.toDouble(),
-                      title: name.text,
-                    ),
-                  ),
+                onAdd!(
+                  image.text,
+                  name.text,
+                  price.text.toDouble(),
                 );
+
               },
               child: const Text(
                 "Confirm",

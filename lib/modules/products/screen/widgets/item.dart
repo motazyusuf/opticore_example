@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../products_model.dart';
+import '../../../../network/products_model.dart';
 
 class Item extends StatelessWidget {
   Item({super.key, required this.product});
-  Product product;
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +17,6 @@ class Item extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
-        // image: DecorationImage(
-        //   image: NetworkImage(
-        //     state.products.products[index].imageURL,
-        //   ),
-        // ),
         boxShadow: [
           BoxShadow(color: Colors.black12, blurRadius: 6, spreadRadius: 2),
         ],

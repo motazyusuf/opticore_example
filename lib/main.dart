@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:opticore_example/modules/api_module/api_module_import.dart';
+
+import 'modules/products/import/products_module_import.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ApiModuleScreen(bloc: ApiModuleBloc()
-        ..add(ApiModuleInitialEvent())),
+      home: ProductsModuleScreen(bloc: ProductsModuleBloc()),
     );
   }
 }
-

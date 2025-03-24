@@ -1,15 +1,16 @@
 import 'package:opticore/opticore.dart';
 
-import '../modules/api_module/products_model.dart';
+import 'products_model.dart';
 
-class ApiModuleRepo extends BaseRepo {
-  Future<Products> getData() async {
-    final response = await networkHelper?.request<Products>(
+class ProductsModuleRepo extends BaseRepo {
+  Future<ApiResponse<Products?>?> getData() async {
+    ApiResponse<Products?>? response = await networkHelper?.request(
       "https://dummyjson.com/products",
+      params: {"limit": 2, "skip": 0},
       (response) => Products.fromJson(response!),
       method: HTTPMethod.get,
     );
-    return response!.data!;
+    return response;
   }
 
   Future<void> addProduct(Product product) async {
