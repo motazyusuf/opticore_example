@@ -38,7 +38,7 @@ class PostItemBottomSheet extends StatelessWidget {
             Spacer(),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColorLight,
+                backgroundColor: context.colorScheme.inversePrimary,
               ),
               onPressed: () {
                 onAdd!(

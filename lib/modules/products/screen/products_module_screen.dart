@@ -40,7 +40,7 @@ class ProductsModuleScreenState
               )
               : SizedBox(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: context.colorScheme.primary,
+        backgroundColor: context.colorScheme.inversePrimary,
         onPressed: () {
           showModalBottomSheet(
             context: context,
