@@ -11,4 +11,20 @@ class ApiModuleRepo extends BaseRepo {
     );
     return response!.data!;
   }
+
+  Future<void> addProduct(Product product) async {
+    await super.updateHeaders(
+      onUpdate: (headers) async {
+        final updatedHeaders = Map<String, String>.from(headers);
+        updatedHeaders['content-type'] = 'application/json';
+        return updatedHeaders;
+      },
+    );
+    await networkHelper?.request(
+      "https://dummyjson.com/products/add",
+      (_) {},
+      body: product.toJson(),
+      method: HTTPMethod.post,
+    );
+  }
 }

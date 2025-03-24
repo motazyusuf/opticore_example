@@ -4,7 +4,6 @@ import '../../products_model.dart';
 
 class Item extends StatelessWidget {
   Item({super.key, required this.product});
-
   Product product;
 
   @override

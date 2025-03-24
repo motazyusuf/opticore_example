@@ -1,2 +1,9 @@
 part of '../api_module_import.dart';
-class ExampleModuleInitialEvent extends BaseEvent {}
+
+class ApiModuleInitialEvent extends BaseEvent {}
+
+class AddProductEvent extends BaseEvent {
+  Product product;
+
+  AddProductEvent(this.product);
+}
