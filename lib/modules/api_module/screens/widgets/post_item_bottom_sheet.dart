@@ -22,9 +22,20 @@ class PostItemBottomSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(decoration: InputDecoration(labelText: "Item Name")),
+            TextField(
+              controller: name,
+              decoration: InputDecoration(labelText: "Item Name"),
+            ),
             const SizedBox(height: 10),
-            TextField(decoration: InputDecoration(labelText: "Item Price")),
+            TextField(
+              controller: price,
+              decoration: InputDecoration(labelText: "Item Price"),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: image,
+              decoration: InputDecoration(labelText: "Item Image"),
+            ),
             Spacer(),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -34,8 +45,7 @@ class PostItemBottomSheet extends StatelessWidget {
                 parentContext.read<ApiModuleBloc>().add(
                   AddProductEvent(
                     Product(
-                      imageURL:
-                          "https://assets.dummyjson.com/public/qr-code.png",
+                      imageURL: image.text,
                       price: price.text.toDouble(),
                       title: name.text,
                     ),
