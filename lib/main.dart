@@ -1,23 +1,37 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:opticore/opticore.dart';
+import 'package:opticore_example/core/routes/pages_routes.dart';
 
-import 'modules/products/import/products_module_import.dart';
+import 'core/routes/app_router.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      path: 'assets/languages',
+      supportedLocales: [Locale('en'), Locale('ar')],
+      fallbackLocale: Locale("en"),
+      startLocale: Locale('en'),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return CoreSetup(
+      appConfig: AppConfig(
+        onGenerateRoute: AppRouter.onGenerateRoute,
+        initialRoute: PagesRoutes.splash,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
+        locale: context.locale,
       ),
-      home: ProductsModuleScreen(bloc: ProductsModuleBloc()),
     );
   }
 }

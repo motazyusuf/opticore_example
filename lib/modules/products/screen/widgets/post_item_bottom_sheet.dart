@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:opticore/opticore.dart';
 
@@ -46,7 +45,7 @@ class PostItemBottomSheet extends StatelessWidget {
                   name.text,
                   price.text.toDouble(),
                 );
-
+                Navigator.pop(context);
               },
               child: const Text(
                 "Confirm",

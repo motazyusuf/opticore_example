@@ -15,20 +15,15 @@ class ProductsModuleBloc extends BaseBloc {
 
   Future<void> loadData(GetProductsEvent event, Emitter emit) async {
     emit(LoadingStateNonRender());
-
     ApiResponse<Products?>? response = await apiRepo.getData();
-    if (response?.type == ApiResponseType.success) {
-      emit(ProductsLoaded(response?.data));
-    }
-
-    // handleApiResponse(response, retryFunc: () => add(event));
-
+    emit(handleApiResponse(response, retryFunc: () => add(event)));
     emit(EndLoadingStateNonRender());
   }
 
   Future<void> addData(AddProductEvent event, Emitter emit) async {
     emit(LoadingStateNonRender());
-    await apiRepo.addProduct(event.product);
+    ApiResponse? response = await apiRepo.addProduct(event.product);
+    emit(handleApiResponse(response, retryFunc: () => add(event)));
     emit(EndLoadingStateNonRender());
   }
 }
