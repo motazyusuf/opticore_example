@@ -14,56 +14,60 @@ class ProductsModuleScreenState
   ProductsModuleScreenState(super.bloc);
 
   @override
-  ScaffoldConfig get scaffoldConfig => ScaffoldConfig(
-    floatingActionButton: FloatingActionButton(
-      backgroundColor: context.colorScheme.inversePrimary,
-      onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          builder:
-              (context) => PostItemBottomSheet(
-                onAdd: (image, name, price) {
-                  postEvent(
-                    AddProductEvent(
-                      Product(
-                        imageURL: image ?? '',
-                        title: name ?? '',
-                        price: price ?? 0,
-                      ),
-                    ),
-                  );
-                },
-              ),
-        );
-      },
-      child: Icon(Icons.add),
-    ),
-  );
+  ScaffoldConfig get scaffoldConfig =>
+      ScaffoldConfig(
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: context.colorScheme.inversePrimary,
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder:
+                  (context) =>
+                  PostItemBottomSheet(
+                    onAdd: (image, name, price) {
+                      postEvent(
+                        AddProductEvent(
+                          Product(
+                            imageURL: image ?? '',
+                            title: name ?? '',
+                            price: price ?? 0,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+            );
+          },
+          child: Icon(Icons.add),
+        ),
+      );
 
   @override
-  bool? get ignoreSafeArea => true@override
+  bool? get ignoreSafeArea => true;
+
+  @override
   Widget buildWidget(BuildContext parentContext, RenderDataState state) {
     return state is ProductsLoaded
         ? Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: state.products?.products.length,
-                      itemBuilder: (context, index) {
-                        return Item(
-                          product:
-                              state.products?.products[index] ??
-                              Product(
-                                title: "title",
-                                price: 0,
-                                imageURL: "imageURL",
-                              ),
-                        );
-                      },
+      children: [
+        Expanded(
+          child: ListView.builder(controller: bloc.scrollController,
+            itemCount: state.products?.products.length,
+            itemBuilder: (context, index) {
+              return Item(
+                product:
+                state.products?.products[index] ??
+                    Product(
+                      title: "title",
+                      price: 0,
+                      imageURL: "imageURL",
                     ),
-                  ),
-                ],
-              )
+              );
+            },
+          ),
+        ),
+      ],
+    )
         : SizedBox();
     // floatingActionButton: FloatingActionButton(
     //   backgroundColor: context.colorScheme.inversePrimary,
