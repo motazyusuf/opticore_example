@@ -4,6 +4,7 @@ class ProductsModuleBloc extends BaseBloc {
   final ScrollController scrollController = ScrollController();
   int skips = 0;
   bool loading = false;
+  List<Product> products = [];
   ProductsModuleRepo apiRepo = ProductsModuleRepo();
 
   ProductsModuleBloc()
@@ -21,10 +22,11 @@ class ProductsModuleBloc extends BaseBloc {
   }
 
   Future<void> loadData(GetProductsEvent event, Emitter emit) async {
-    // emit(LoadingStateNonRender());
+    emit(LoadingStateNonRender());
     ApiResponse<Products?>? response = await apiRepo.getData(skips);
+    products = response?.data?.products ?? [];
     emit(handleApiResponse(response, retryFunc: () => add(event)));
-    // emit(EndLoadingStateNonRender());
+    emit(EndLoadingStateNonRender());
   }
 
   Future<void> addData(AddProductEvent event, Emitter emit) async {
@@ -39,11 +41,12 @@ class ProductsModuleBloc extends BaseBloc {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       skips += 2;
+      emit(LoadingStateNonRender());
       ApiResponse<Products?>? response = await apiRepo.getData(skips);
-      final currentState = state as ProductsLoaded;
-      response?.data?.products =
-          (currentState.products!.products + response.data!.products);
+      // final currentState = state as ProductsLoaded;
+      products = (products + (response?.data?.products ?? []));
       emit(handleApiResponse(response, retryFunc: () => add(event)));
+      emit(EndLoadingStateNonRender());
     }
   }
 }
