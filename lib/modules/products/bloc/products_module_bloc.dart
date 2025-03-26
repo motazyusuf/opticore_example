@@ -41,12 +41,13 @@ class ProductsModuleBloc extends BaseBloc {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       skips += 2;
-      emit(LoadingStateNonRender());
+      // emit(LoadingStateNonRender());
       ApiResponse<Products?>? response = await apiRepo.getData(skips);
       // final currentState = state as ProductsLoaded;
       products = (products + (response?.data?.products ?? []));
       emit(handleApiResponse(response, retryFunc: () => add(event)));
-      emit(EndLoadingStateNonRender());
+      loading = false;
+      // emit(EndLoadingStateNonRender());
     }
   }
 }
