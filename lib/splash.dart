@@ -37,7 +37,7 @@ class _SplashState extends State<Splash> {
           customMessageButton: MyStrings.retry.tr(),
         ),
       );
-      Navigator.pushReplacementNamed(context, PagesRoutes.home);
+      context.pushReplacementNamed(PagesRoutes.home);
     });
     super.initState();
   }
