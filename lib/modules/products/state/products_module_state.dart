@@ -13,8 +13,4 @@ final class ProductsLoaded extends RenderDataState {
   ProductsLoaded(super.data);
 }
 
-final class MoatazState extends NonRenderState {
-  final String message;
-
-  MoatazState(this.message);
-}
+final class ProductAdded extends NonRenderState {}

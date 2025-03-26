@@ -72,7 +72,7 @@ class ProductsModuleScreenState
 
   @override
   void listenToState(BuildContext context, BaseState state) {
-    if ((state is EndLoadingStateNonRender) && bloc.added) {
+    if ((state is ProductAdded)) {
       ToastHelper.showToast("Product Added", type: ToastType.success);
     }
   }
