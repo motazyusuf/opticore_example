@@ -4,14 +4,13 @@ final class ProductsInitialState extends RenderDataState {
   ProductsInitialState() : super(null);
 }
 
+// final class ProductsLoaded extends RenderDataState {
+//   Products? products;
+//   ProductsLoaded(this.products) : super(null);
+// }
+
 final class ProductsLoaded extends RenderDataState {
-  Products? products;
-
-  ProductsLoaded(this.products) : super(null);
+  ProductsLoaded(super.data);
 }
 
-final class MoatazState extends NonRenderState {
-  final String message;
-
-  MoatazState(this.message);
-}
+final class ProductAdded extends NonRenderState {}

@@ -4,7 +4,7 @@ class ProductsModuleStateFactory extends BaseFactory {
   @override
   BaseState getState<M>(M data) {
     if (data is Products) {
-      return ProductsLoaded(data);
+      return ProductsLoaded("");
     }
     return DefaultState();
   }
