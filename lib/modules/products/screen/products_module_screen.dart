@@ -54,7 +54,9 @@ class ProductsModuleScreenState
                 itemCount: bloc.products.length,
                 itemBuilder: (context, index) {
                   // to show indicator when loading more
-                  if (index == bloc.products.length - 1 && bloc.loading) {
+                  if (index == bloc.products.length - 1 &&
+                      bloc.loading &&
+                      bloc.products.length > 3) {
                     return const Padding(
                       padding: EdgeInsets.all(20.0),
                       child: Center(child: CircularProgressIndicator()),

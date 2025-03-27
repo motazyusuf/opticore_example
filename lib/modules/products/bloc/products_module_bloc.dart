@@ -3,7 +3,7 @@ part of '../import/products_module_import.dart';
 class ProductsModuleBloc extends BaseBloc {
   final ScrollController scrollController = ScrollController();
   int skips = 0;
-  bool loading = false;
+  late bool loading;
   List<Product> products = [];
   ProductsModuleRepo apiRepo = ProductsModuleRepo();
 
@@ -41,7 +41,7 @@ class ProductsModuleBloc extends BaseBloc {
     loading = true;
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      skips += 2;
+      skips += 4;
       ApiResponse<Products?>? response = await apiRepo.getData(skips);
       // final currentState = state as ProductsLoaded;
       products = (products + (response?.data?.products ?? []));

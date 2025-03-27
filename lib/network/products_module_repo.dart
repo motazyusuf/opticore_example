@@ -6,7 +6,7 @@ class ProductsModuleRepo extends BaseRepo {
   Future<ApiResponse<Products?>?> getData(int skips) async {
     ApiResponse<Products?>? response = await networkHelper?.request(
       "https://dummyjson.com/products",
-      params: {"limit": 2, "skip": skips},
+      params: {"limit": 4, "skip": skips},
       (response) => Products.fromJson(response!),
       method: HTTPMethod.get,
     );
@@ -27,7 +27,6 @@ class ProductsModuleRepo extends BaseRepo {
       body: product.toJson(),
       method: HTTPMethod.post,
     );
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>${response?.type}");
     return response;
   }
 }
